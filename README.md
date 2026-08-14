@@ -28,15 +28,16 @@ For every project you work on, create a subfolder in `01_Projects` (e.g., `01_Pr
 
 ## 2. Integrating Your AI Tools
 
-Navigate to the specific folder for your AI tool to find the setup instructions and necessary scripts/rules:
+### Setup & Integration
+**All supported IDEs and Agents now use a unified "Skill Profile" architecture.** We provide a tailored `SKILL.md` file for each tool in their respective folders.
 
-- 🖧 **[Claude Code (CLI)](claude/README.md)**: Uses a built-in `SessionEnd` hook to run a Node script.
-- 🚀 **[Google Antigravity IDE](antigravity/README.md)**: Uses a native `/vault-sync` Skill for seamless integration.
-- 🖱️ **[Cursor](cursor/README.md)**: Uses a `.cursorrules` injection to force end-of-task syncing.
-- 🤖 **[Aider](aider/README.md)**: Uses an architect prompt via `--message`.
-- ✈️ **[GitHub Copilot](copilot/instructions.md)**: Uses custom VS Code Chat instructions.
-- 🏄 **[Windsurf](windsurf/windsurfrules-example)**: Uses `.windsurfrules`.
-- 🛠️ **[Cline / Roo](cline/clinerules-example)**: Uses `.clinerules`.
+1. **Claude Code**: Uses a built-in `SessionEnd` hook. See `claude/README.md`.
+2. **Google Antigravity IDE**: Install `antigravity/SKILL.md` to your `~/.gemini/config/skills/vault-sync/` directory.
+3. **Cursor**: Copy `cursor/SKILL.md` into your project's `.cursorrules`.
+4. **Windsurf**: Copy `windsurf/SKILL.md` into your project's `.windsurfrules`.
+5. **Cline**: Copy `cline/SKILL.md` into your `.clinerules`.
+6. **Copilot**: Copy `copilot/SKILL.md` into VS Code Copilot custom instructions.
+7. **Aider**: Pass `aider/SKILL.md` using the `--message` flag.
 
 ## 3. Archiving Old Sessions
 
