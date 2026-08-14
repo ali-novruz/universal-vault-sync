@@ -1,32 +1,28 @@
-# Kimi Code `SKILL.md`
-
-Kimi Code (via VS Code Extension or Kimi Code CLI) allows you to use system prompts and project rules to enforce behavior.
-
-## Integration Instructions
-
-1. Copy the contents of the **System Prompt** below.
-2. If you are using the **Kimi Code VS Code Extension**, paste this into your project-level settings or custom instructions field.
-3. If you are using the **Kimi Code CLI**, save this as `.kimi/rules.md` in your project root or append it to your system prompt configuration.
-
+---
+name: vault-sync
+description: >-
+  Native Kimi Code Skill to archive the current coding session into the Obsidian vault.
+  To install: Save this file as `.kimi/rules.md` in your project root, or paste it into your Kimi Code IDE extension's custom instructions field.
 ---
 
-## System Prompt
+# Vault Sync Procedure
 
-```markdown
-# 🌌 Kimi Code Vault Sync Instructions
+The user wants to archive this current session into their Obsidian vault. Substitute their actual vault projects root (e.g. `C:\Users\you\Desktop\Vault\01_Projects`) for `<VAULT_PROJECTS_ROOT>` below.
 
-You are an advanced AI coding assistant operating within a structured PARA (Projects, Areas, Resources, Archive) workflow.
-Your core directive is to maintain "continuous shared memory" with other AI agents by writing session logs to a central Obsidian Vault.
+1. **Understand the Session**: Look at your own transcript/memory of this conversation. Summarize what has been accomplished.
+2. **Identify Project**: The project name is the basename of the current workspace directory.
+3. **Write Chat Log**: Create a short (10-20 line), genuinely useful summary of this session. Write this summary to a new file in `<VAULT_PROJECTS_ROOT>\<project-name>\Chats\YYYY-MM-DD.md`. Append `-2`, `-3` etc. to the filename if one already exists for today.
+4. **Update Project Note**: Read the project note at `<VAULT_PROJECTS_ROOT>\<project-name>\README.md`.
+    - If it exists, add a NEW dated entry to the "Progress Log" section for this session. Update "Tech Stack", "Key Decisions", "Problems & Solutions", and "Open Questions / TODOs" if new information arose.
+    - If it doesn't exist, create it with the following sections:
+      ```markdown
+      # <project-name>
+      ## Overview
+      ## Tech Stack / Architecture
+      ## Key Decisions
+      ## Problems & Solutions
+      ## Progress Log
+      ## Open Questions / TODOs
+      ```
 
-**At the end of every task or conversation, you MUST autonomously perform the following:**
-
-1. Locate the active project's folder in the user's Obsidian Vault (typically `01_Projects/<ProjectName>/Chats/`).
-2. Read the vault's current state to ensure you don't overwrite the day's existing log.
-3. Create or append to a Markdown file named `YYYY-MM-DD.md` in that folder.
-4. Document the following:
-   - What you accomplished.
-   - Any files you created or modified.
-   - Any architectural decisions, bug fixes, or next steps.
-
-Never end a session without syncing to the vault.
-```
+**Important**: Do not ask the user for permission to create/edit these files, just execute the file operations directly as your final step!
