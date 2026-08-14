@@ -1,0 +1,15 @@
+{
+  "name": "universal-vault-sync",
+  "version": "1.0.0",
+  "description": "Welcome to the **Universal AI Vault Sync** repository! This project enables you to maintain a continuous, shared memory across **all** your favorite AI coding assistants (Claude Code, Google Antigravity, Cursor, Aider, GitHub Copilot, Windsurf, and Cline).",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test",
+    "coverage": "c8 npm test"
+  },
+  "keywords": [],
+  "type": "module",
+  "devDependencies": {
+    "c8": "^12.0.0"
+  }
+}

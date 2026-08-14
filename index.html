@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Universal AI Vault Sync — Cross-Agent Shared Memory for Obsidian</title>
+  <meta name="description" content="Open-source Node.js toolkit that gives 7 AI coding assistants shared persistent memory through a single Obsidian PARA vault.">
+  
+  <!-- Phase 1 Fonts: Syne, Chakra Petch, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Inter:opsz,wght@14..32,300..600&family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="index.css">
+  
+  <!-- Three.js r134 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
+  <!-- GSAP 3.12 & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <!-- App -->
+  <script src="app.js" type="module" defer></script>
+</head>
+<body>
+
+  <!-- Phase 4: WebGL Canvas -->
+  <canvas id="webgl-canvas" aria-label="3D visualization showing 7 AI agent nodes orbiting a central Obsidian vault"></canvas>
+
+  <!-- Phase 2: Header & Status Bar -->
+  <header id="site-header" role="banner">
+    <div class="logo">
+      <h1>UNIVERSAL <span class="dim">//</span> VAULT SYNC</h1>
+      <div class="status-indicator">
+        <span class="status-dot"></span> MIT · v1.0.0
+      </div>
+    </div>
+    <nav aria-label="Main Navigation">
+      <ul>
+        <li><a href="#module-hero">About</a></li>
+        <li><a href="#module-condenser">Condenser</a></li>
+        <li><a href="#module-matrix">Setup</a></li>
+        <li><a href="#module-para">Vault</a></li>
+        <li><a href="#module-radar">Tests</a></li>
+      </ul>
+    </nav>
+    <div class="header-controls">
+      <button id="audio-toggle" class="icon-btn" aria-label="Toggle Audio Telemetry">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Phase 2: Hero Viewport -->
+    <section class="hero-section asymmetrical" id="module-hero">
+      <div class="hero-content">
+        <h2 class="syne-heading">Stop Losing<br>Context Between<br>AI Tools.</h2>
+        <p class="inter-prose">AI coding assistants forget everything when you close the terminal. This open-source toolkit writes session summaries from Claude Code, Antigravity, Cursor, Windsurf, Aider, Cline, and Copilot into a single Obsidian vault using the PARA method. When you switch tools, the new agent reads the vault and picks up where the last one stopped.</p>
+        
+        <div class="hero-actions">
+          <a href="https://github.com" id="trigger-sync" class="cyber-btn primary" target="_blank" rel="noopener">
+            <span class="btn-text">VIEW ON GITHUB</span>
+          </a>
+          <a href="#module-matrix" class="cyber-btn secondary">
+            <span class="btn-text">SETUP GUIDE</span>
+          </a>
+        </div>
+
+        <!-- Phase 2: Agent Status Pill Matrix -->
+        <div class="agent-pill-matrix">
+          <span class="agent-pill claude"><span class="dot"></span> Claude Code</span>
+          <span class="agent-pill antigravity"><span class="dot"></span> Antigravity</span>
+          <span class="agent-pill cursor"><span class="dot"></span> Cursor</span>
+          <span class="agent-pill windsurf"><span class="dot"></span> Windsurf</span>
+          <span class="agent-pill aider"><span class="dot"></span> Aider</span>
+          <span class="agent-pill cline"><span class="dot"></span> Cline</span>
+          <span class="agent-pill copilot"><span class="dot"></span> Copilot</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="content-wrapper hud-layout">
+
+      <!-- Phase 2 Module 1: Log Condenser -->
+      <section class="sandbox-module" id="module-condenser">
+        <header class="module-header">
+          <h3 class="chakra-heading">Log Condenser</h3>
+          <span class="module-meta">condense.mjs · vault-sync.mjs</span>
+        </header>
+        
+        <div class="condenser-split-pane">
+          <!-- Left: Raw JSONL -->
+          <div class="terminal-view raw-pane">
+            <div class="terminal-header">Raw Session Transcript (.jsonl)</div>
+            <pre><code>{"type":"user","message":{"role":"user","content":"Refactor auth module"}}
+{"type":"assistant","message":{"role":"assistant","content":[{"type":"tool_use","name":"Edit","input":{"file_path":"/src/auth.ts"}}]}}
+{"type":"assistant","message":{"role":"assistant","content":[{"type":"text","text":"Done. Switched to JWT..."}]}}
+{"type":"summary","summary":"Refactored auth to JWT tokens"}</code></pre>
+          </div>
+          
+          <!-- Center: Pipeline Metrics -->
+          <div class="conduit-metrics">
+            <div class="metric-block">
+              <span class="metric-val">→</span>
+              <span class="metric-lbl">condense.mjs</span>
+            </div>
+            <div class="sync-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+            <div class="metric-block">
+              <span class="metric-val">→</span>
+              <span class="metric-lbl">vault-sync.mjs</span>
+            </div>
+            <div class="checksum">Node.js · Zero Dependencies</div>
+          </div>
+
+          <!-- Right: Markdown Output -->
+          <div class="terminal-view condensed-pane">
+            <div class="terminal-header">Obsidian Vault Output (.md)</div>
+            <div class="markdown-preview">
+              <span class="md-tag">01_Projects/my-app/Chats</span>
+              <h4>2026-08-14.md</h4>
+              <ul>
+                <li>Refactored auth module to JWT tokens.</li>
+                <li>Edited <code>/src/auth.ts</code></li>
+                <li>Session ended. Summary written.</li>
+              </ul>
+              <p style="margin-top:12px; font-size:11px; color:rgba(255,255,255,0.3);">Strips tool_result payloads, base64 blobs, file dumps. Keeps user prompts, assistant text, tool_use summaries.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Phase 2 Module 2: Cross-Agent Porting Matrix -->
+      <section class="sandbox-module" id="module-matrix">
+        <header class="module-header">
+          <h3 class="chakra-heading">Setup &amp; Integration</h3>
+          <span class="module-meta">Per-Tool Config</span>
+        </header>
+
+        <div class="matrix-player">
+          <div class="tab-triggers">
+            <button class="tab-btn active" data-step="1" aria-label="Claude Code setup">Claude Code</button>
+            <button class="tab-btn" data-step="2" aria-label="Antigravity setup">Antigravity</button>
+            <button class="tab-btn" data-step="3" aria-label="Other tools setup">Cursor &amp; Others</button>
+          </div>
+          <div class="tab-content">
+            <div class="step-view active" id="step-1">
+              <h4>Claude Code (CLI Hook)</h4>
+              <p>Claude Code has a built-in <code>SessionEnd</code> hook. When you exit a session, the hook runs <code>vault-sync.mjs</code>. It reads the raw <code>.jsonl</code> transcript, condenses it via <code>condense()</code>, and spawns a headless <code>claude -p</code> to write the summary into your Obsidian vault's <code>01_Projects/</code> folder.</p>
+              <code>// ~/.claude/settings.json → hooks.SessionEnd → "node vault-sync.mjs"</code>
+            </div>
+            <div class="step-view" id="step-2">
+              <h4>Google Antigravity IDE (Skill)</h4>
+              <p>Antigravity is a persistent IDE — it doesn't emit session-end events. Instead, you install a native <strong>Antigravity Skill</strong>. Type <code>/vault-sync</code> in the chat; the agent reads its own transcript, summarizes the session, and writes directly to your vault using its file operation tools.</p>
+              <code>// Copy SKILL.md → ~/.gemini/config/skills/vault-sync/</code>
+            </div>
+            <div class="step-view" id="step-3">
+              <h4>Cursor, Windsurf, Aider, Cline, Copilot</h4>
+              <p>These tools use prompt injection through their config files (<code>.cursorrules</code>, <code>.windsurfrules</code>, <code>.clinerules</code>, or VS Code instructions). The injected system rule tells the agent to write a session summary to your vault path as its final step after completing a task.</p>
+              <code>// Copy the example file from each tool's folder into your project root</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Phase 2 Module 3: PARA Tree & Test Radar -->
+      <div class="hud-split-row">
+        <!-- PARA File Tree -->
+        <section class="sandbox-module half-width" id="module-para">
+          <header class="module-header">
+            <h3 class="chakra-heading">Vault Structure</h3>
+            <span class="module-meta">PARA Method</span>
+          </header>
+          
+          <div class="glass-panel para-explorer">
+            <ul class="tree-root" role="tree">
+              <li class="folder open" role="treeitem" aria-expanded="true">
+                <span class="folder-name" tabindex="0" role="button">📁 00_Inbox</span>
+                <ul class="tree-children" role="group">
+                  <li class="file" role="treeitem"><span class="file-name" tabindex="0">📄 quick-capture.md</span></li>
+                </ul>
+              </li>
+              <li class="folder open" role="treeitem" aria-expanded="true">
+                <span class="folder-name" tabindex="0" role="button">📁 01_Projects</span>
+                <ul class="tree-children" role="group">
+                  <li class="folder open" role="treeitem" aria-expanded="true">
+                    <span class="folder-name" tabindex="0" role="button">📁 my-web-app</span>
+                    <ul class="tree-children" role="group">
+                      <li class="file" role="treeitem"><span class="file-name" tabindex="0">📄 README.md</span></li>
+                      <li class="folder" role="treeitem" aria-expanded="false">
+                        <span class="folder-name" tabindex="0" role="button">📁 Chats</span>
+                        <ul class="tree-children" role="group">
+                          <li class="file" role="treeitem"><span class="file-name" tabindex="0">📄 2026-08-14.md</span></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li class="folder" role="treeitem" aria-expanded="false"><span class="folder-name" tabindex="0" role="button">📁 02_Areas</span></li>
+              <li class="folder" role="treeitem" aria-expanded="false"><span class="folder-name" tabindex="0" role="button">📁 03_Resources</span></li>
+              <li class="folder" role="treeitem" aria-expanded="false"><span class="folder-name" tabindex="0" role="button">📁 04_Archive</span></li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Test Coverage Radar -->
+        <section class="sandbox-module half-width" id="module-radar">
+          <header class="module-header">
+            <h3 class="chakra-heading">Test Coverage</h3>
+            <span class="module-meta">21 Tests · c8 · node --test</span>
+          </header>
+
+          <div class="coverage-radar">
+            <!-- Statements: 99.16% -->
+            <div class="stat-circle">
+              <svg viewBox="0 0 36 36" class="circular-chart">
+                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="circle" stroke-dasharray="99, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <text x="18" y="20.35" class="percentage">99.1%</text>
+              </svg>
+              <div class="stat-label">Statements</div>
+            </div>
+            <!-- Branches: 84.49% -->
+            <div class="stat-circle">
+              <svg viewBox="0 0 36 36" class="circular-chart">
+                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="circle" stroke-dasharray="84, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <text x="18" y="20.35" class="percentage">84.4%</text>
+              </svg>
+              <div class="stat-label">Branches</div>
+            </div>
+            <!-- Functions: 100% -->
+            <div class="stat-circle">
+              <svg viewBox="0 0 36 36" class="circular-chart">
+                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <text x="18" y="20.35" class="percentage">100%</text>
+              </svg>
+              <div class="stat-label">Functions</div>
+            </div>
+            <!-- Lines: 99.16% -->
+            <div class="stat-circle">
+              <svg viewBox="0 0 36 36" class="circular-chart">
+                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="circle" stroke-dasharray="99, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <text x="18" y="20.35" class="percentage">99.1%</text>
+              </svg>
+              <div class="stat-label">Lines</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2026 Universal AI Vault Sync &middot; MIT License &middot; Node.js &middot; Zero Runtime Dependencies</p>
+  </footer>
+
+</body>
+</html>
