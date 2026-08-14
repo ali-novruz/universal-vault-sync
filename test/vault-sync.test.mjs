@@ -68,6 +68,15 @@ test("main - cwd inside vault", async () => {
   assert.ok(logContent.includes("Skip: session cwd is inside the vault itself"));
 });
 
+test("main - cwd with vault as string prefix but not inside it", async () => {
+  const logFile = path.join(os.tmpdir(), "test-main-log2b.log");
+  // "/tmp/vaultOther" starts with the string "/tmp/vault" but is not inside it —
+  // must not be treated as inside the vault.
+  await main('{"cwd": "/tmp/vaultOther"}', "/tmp/vault", logFile, {});
+  const logContent = fs.readFileSync(logFile, "utf8");
+  assert.ok(!logContent.includes("Skip: session cwd is inside the vault itself"));
+});
+
 test("main - no transcript", async () => {
   const logFile = path.join(os.tmpdir(), "test-main-log3.log");
   await main('{"cwd": "/tmp/outside"}', "/tmp/vault", logFile, {});

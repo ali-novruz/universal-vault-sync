@@ -37,7 +37,10 @@ export async function main(inputStr, vaultRoot, logFile, processEnv) {
   const normCwd = path.normalize(cwd);
   const normVault = path.normalize(vaultRoot);
 
-  if (normCwd.toLowerCase().startsWith(normVault.toLowerCase())) {
+  const cwdLower = normCwd.toLowerCase();
+  const vaultLower = normVault.toLowerCase();
+  const isInsideVault = cwdLower === vaultLower || cwdLower.startsWith(vaultLower + path.sep);
+  if (isInsideVault) {
     log(`Skip: session cwd is inside the vault itself (${cwd})`, logFile);
     return;
   }
