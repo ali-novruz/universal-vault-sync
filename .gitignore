@@ -4,3 +4,11 @@ coverage/
 .env
 .vault_sync_state
 *.log
+
+# Frontend site (local only)
+index.html
+index.css
+app.js
+UNIVERSAL_VAULT_SYNC_FRONTEND_MASTER_PROMPT.md
+PHASE_BY_PHASE_STANDALONE_PROMPTS.md
+prompts/
