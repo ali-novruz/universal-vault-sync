@@ -31,7 +31,7 @@ For every project you work on, create a subfolder in `01_Projects` (e.g., `01_Pr
 ### Setup & Integration
 **All supported IDEs and Agents now use a unified "Skill Profile" architecture.** We provide a tailored `SKILL.md` file for each tool in their respective folders.
 
-1. **Claude Code**: Uses a built-in `SessionEnd` hook. See `claude/README.md`.
+1. **Claude Code**: Provide `claude/SKILL.md` as custom instructions, or use the built-in `SessionEnd` hook. See `claude/README.md`.
 2. **Google Antigravity IDE**: Install `antigravity/SKILL.md` to your `~/.gemini/config/skills/vault-sync/` directory.
 3. **Cursor**: Copy `cursor/SKILL.md` into your project's `.cursorrules`.
 4. **Windsurf**: Copy `windsurf/SKILL.md` into your project's `.windsurfrules`.
