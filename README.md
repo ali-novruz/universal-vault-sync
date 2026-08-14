@@ -16,15 +16,9 @@ By forcing all agents to write to a centralized markdown vault:
 ## 1. Obsidian & Vault Setup
 
 1. **Download Obsidian**: [obsidian.md](https://obsidian.md/)
-2. **Create a Vault**: Create a new folder on your computer (e.g., `C:\Users\you\Desktop\MyAIVault`).
-3. **Structure the Vault**: Inside the vault, create the PARA folders:
-   - `00_Inbox`
-   - `01_Projects` (This is where your AI agents will sync to!)
-   - `02_Areas`
-   - `03_Resources`
-   - `04_Archive`
-
-For every project you work on, create a subfolder in `01_Projects` (e.g., `01_Projects/MyWebsite`). 
+2. **Download the Claudesidian PARA Vault**: To get the exact, optimized PARA structure required for these agents, you should clone or download the vault template from [heyitsnoah/claudesidian](https://github.com/heyitsnoah/claudesidian).
+3. **Open in Obsidian**: Extract the `claudesidian` repo and open the folder as a Vault in Obsidian.
+4. **Create your project**: Inside the vault's `01_Projects` directory, create a subfolder for your new codebase (e.g., `01_Projects/MyWebsite`). This is where your AI agents will sync to! 
 
 ## 2. Integrating Your AI Tools
 
