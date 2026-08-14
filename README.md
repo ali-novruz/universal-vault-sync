@@ -2,7 +2,7 @@
 
 Welcome to the **Universal AI Vault Sync** repository! This project enables you to maintain a continuous, shared memory across **all** your favorite AI coding assistants (Claude Code, Google Antigravity, Cursor, Aider, GitHub Copilot, Windsurf, and Cline). 
 
-🌐 **Live Demo & Documentation:** [https://frontend-ten-wine-61.vercel.app](https://frontend-ten-wine-61.vercel.app)
+🌐 **Live Demo & Documentation:** [https://universal-vault-sync.vercel.app](https://universal-vault-sync.vercel.app)
 
 Instead of starting from scratch in every new chat or losing context when you switch tools, this setup automatically writes your AI session summaries and architectural decisions into an **Obsidian** vault using the PARA (Projects, Areas, Resources, Archive) method.
 
