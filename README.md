@@ -32,6 +32,8 @@ By forcing all agents to write to a centralized markdown vault:
 5. **Cline**: Copy `cline/SKILL.md` into your `.clinerules`.
 6. **Copilot**: Copy `copilot/SKILL.md` into VS Code Copilot custom instructions.
 7. **Aider**: Pass `aider/SKILL.md` using the `--message` flag.
+8. **Kimi Code**: Save `kimi/SKILL.md` as `.kimi/rules.md` in your project root or add to your IDE extension settings.
+9. **Codex (ChatGPT)**: Paste `codex/SKILL.md` into your ChatGPT Custom Instructions.
 
 ## 3. Archiving Old Sessions
 
