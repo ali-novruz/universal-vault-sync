@@ -14,7 +14,13 @@ import { fileURLToPath } from "url";
 
 export function truncate(s, n) {
   if (typeof s !== "string") return s;
-  return s.length > n ? s.slice(0, n) + ` …[${s.length - n} chars truncated]` : s;
+  if (s.length <= n) return s;
+  // Don't split a UTF-16 surrogate pair (e.g. emoji): back the cut up by
+  // one if it would land between a high and low surrogate.
+  let cut = n;
+  const code = s.charCodeAt(cut - 1);
+  if (code >= 0xd800 && code <= 0xdbff) cut -= 1;
+  return s.slice(0, cut) + ` …[${s.length - cut} chars truncated]`;
 }
 
 export function summarizeToolInput(name, input) {
@@ -51,6 +57,10 @@ export function condense(inFile, outFile) {
       } catch {
         return;
       }
+      // JSON.parse succeeds for any valid JSON value, not just objects —
+      // a bare `null`, number, string, or array parses fine, then any
+      // property access on it throws (or, for null, always throws).
+      if (!obj || typeof obj !== "object") return;
 
       const type = obj.type;
       const ts = obj.timestamp || "";

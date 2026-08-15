@@ -11,6 +11,16 @@ test("truncate", () => {
   assert.strictEqual(truncate(null, 5), null);
 });
 
+test("truncate does not split a surrogate pair", () => {
+  // "X" + 1000 emoji = 1 + 2000 UTF-16 code units. Cutting at 2000 lands
+  // exactly between the high and low surrogate of the 1000th emoji.
+  const text = "X" + "😀".repeat(1000);
+  const result = truncate(text, 2000);
+  assert.ok(!/[\ud800-\udbff](?![\udc00-\udfff])/.test(result), "should not leave an unpaired high surrogate");
+  assert.ok(!result.includes("�"), "should not contain a replacement character");
+  assert.ok(result.startsWith("X" + "😀".repeat(999)));
+});
+
 test("summarizeToolInput", () => {
   assert.strictEqual(summarizeToolInput("Bash", { command: "echo hi" }), "`echo hi`");
   assert.strictEqual(summarizeToolInput("Read", { file_path: "foo.txt" }), "foo.txt");
@@ -44,7 +54,14 @@ test("condense", async () => {
     '{"type":"user"}',
     '{"type":"assistant","message":{"role":"assistant","content":[{"type":"tool_use","name":"TaskCreate","input":{"task":"do"}}]}}',
     '{"type":"user","message":{"role":"user","content":""}}',
-    '{"type":"assistant","message":{"role":"assistant","content":[{"type":"text","text":""}]}}'
+    '{"type":"assistant","message":{"role":"assistant","content":[{"type":"text","text":""}]}}',
+    // Bare JSON values that parse successfully but aren't objects — must
+    // be skipped, not crash the line handler.
+    'null',
+    '42',
+    '"just a string"',
+    '[1,2,3]',
+    'true',
   ];
 
   fs.writeFileSync(inFile, lines.join("\n"));

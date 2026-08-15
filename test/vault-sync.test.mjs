@@ -11,6 +11,13 @@ test("truncate", () => {
   assert.strictEqual(truncate(null, 5), null);
 });
 
+test("truncate does not split a surrogate pair", () => {
+  const text = "X" + "😀".repeat(1000);
+  const result = truncate(text, 2000);
+  assert.ok(!/[\ud800-\udbff](?![\udc00-\udfff])/.test(result), "should not leave an unpaired high surrogate");
+  assert.ok(!result.includes("�"), "should not contain a replacement character");
+});
+
 test("summarizeToolInput", () => {
   assert.strictEqual(summarizeToolInput("Bash", { command: "echo hi" }), "`echo hi`");
   assert.strictEqual(summarizeToolInput("Read", { file_path: "foo.txt" }), "foo.txt");
@@ -42,6 +49,10 @@ test("condense", async () => {
     'invalid json',
     '{"type":"user","message":{"role":"user","content":"Hello"}}',
     '{"type":"assistant","message":{"role":"assistant","content":[{"type":"text","text":"Hi there"},{"type":"tool_use","name":"Bash","input":{"command":"ls"}}]}}',
+    // Bare JSON values that parse successfully but aren't objects — must
+    // be skipped, not crash the line handler.
+    'null',
+    '[1,2,3]',
   ];
 
   fs.writeFileSync(inFile, lines.join("\n"));

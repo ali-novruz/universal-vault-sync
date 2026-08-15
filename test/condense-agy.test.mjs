@@ -11,6 +11,13 @@ test("truncate", () => {
   assert.strictEqual(truncate(null, 5), null);
 });
 
+test("truncate does not split a surrogate pair", () => {
+  const text = "X" + "😀".repeat(1000);
+  const result = truncate(text, 2000);
+  assert.ok(!/[\ud800-\udbff](?![\udc00-\udfff])/.test(result), "should not leave an unpaired high surrogate");
+  assert.ok(!result.includes("�"), "should not contain a replacement character");
+});
+
 test("summarizeToolInput", () => {
   assert.strictEqual(summarizeToolInput("run_command", { CommandLine: "echo hi" }), "`echo hi`");
   assert.strictEqual(summarizeToolInput("view_file", { AbsolutePath: "foo.txt" }), "foo.txt");
@@ -35,7 +42,11 @@ test("condense", async () => {
     '{"source":"USER_EXPLICIT","step_index":1,"content":"Hello"}',
     '{"source":"MODEL","step_index":2,"content":"Hi there","tool_calls":[{"name":"run_command","args":{"CommandLine":"ls"}}]}',
     '{"source":"SYSTEM","step_index":3,"content":"System message"}',
-    '{"source":"USER_EXPLICIT","step_index":4}'
+    '{"source":"USER_EXPLICIT","step_index":4}',
+    // Bare JSON values that parse successfully but aren't objects — must
+    // be skipped, not crash the line handler.
+    'null',
+    '[1,2,3]',
   ];
 
   fs.writeFileSync(inFile, lines.join("\n"));

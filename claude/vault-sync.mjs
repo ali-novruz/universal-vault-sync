@@ -107,7 +107,13 @@ export async function main(inputStr, vaultRoot, logFile, processEnv) {
 
 export function truncate(s, n) {
   if (typeof s !== "string") return s;
-  return s.length > n ? s.slice(0, n) + ` …[${s.length - n} chars truncated]` : s;
+  if (s.length <= n) return s;
+  // Don't split a UTF-16 surrogate pair (e.g. emoji): back the cut up by
+  // one if it would land between a high and low surrogate.
+  let cut = n;
+  const code = s.charCodeAt(cut - 1);
+  if (code >= 0xd800 && code <= 0xdbff) cut -= 1;
+  return s.slice(0, cut) + ` …[${s.length - cut} chars truncated]`;
 }
 
 export function summarizeToolInput(name, inp) {
@@ -138,6 +144,13 @@ export function condense(file) {
       } catch {
         return;
       }
+      // JSON.parse succeeds for any valid JSON value, not just objects —
+      // a bare `null`, number, string, or array parses fine, then any
+      // property access on it throws (or, for null, always throws). An
+      // uncaught throw here escapes this Promise (it's inside a sync
+      // event-listener callback, not the executor), crashing the whole
+      // SessionEnd hook process instead of just skipping the bad line.
+      if (!obj || typeof obj !== "object") return;
       if (obj.type === "summary") {
         out += `\n### [SUMMARY] ${obj.summary || ""}\n`;
         return;
