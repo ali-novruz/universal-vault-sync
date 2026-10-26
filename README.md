@@ -25,15 +25,24 @@ By forcing all agents to write to a centralized markdown vault:
 ### Setup & Integration
 **All supported IDEs and Agents now use a unified "Skill Profile" architecture.** We provide a tailored `SKILL.md` file for each tool in their respective folders.
 
-1. **Claude Code**: Provide `claude/SKILL.md` as custom instructions, or use the built-in `SessionEnd` hook. See `claude/README.md`.
+1. **Claude Code**: Install `claude/SKILL.md` as `~/.claude/skills/vault-sync/SKILL.md` (then type `/vault-sync`), or use the automatic `SessionEnd` hook. See `claude/README.md`.
 2. **Google Antigravity IDE**: Install `antigravity/SKILL.md` to your `~/.gemini/config/skills/vault-sync/` directory.
 3. **Cursor**: Copy `cursor/SKILL.md` into your project's `.cursorrules`.
 4. **Windsurf**: Copy `windsurf/SKILL.md` into your project's `.windsurfrules`.
 5. **Cline**: Copy `cline/SKILL.md` into your `.clinerules`.
 6. **Copilot**: Copy `copilot/SKILL.md` into VS Code Copilot custom instructions.
-7. **Aider**: Pass `aider/SKILL.md` using the `--message` flag.
+7. **Aider**: Load `aider/SKILL.md` with `aider --read aider/SKILL.md` (see `aider/README.md`).
 8. **Kimi Code**: Save `kimi/SKILL.md` as `.kimi/rules.md` in your project root or add to your IDE extension settings.
 9. **Codex (ChatGPT)**: Paste `codex/SKILL.md` into your ChatGPT Custom Instructions.
+
+### Standalone Skills (install without cloning)
+
+Just want the skills? The [`skills/`](skills/) folder has two self-contained, agent-agnostic `SKILL.md` packages that work in Claude Code, Codex, Antigravity, Cursor, Copilot and 20+ other agents:
+
+- **[`vault-sync`](skills/vault-sync/SKILL.md)** — writes the session into your vault when you finish.
+- **[`vault-recall`](skills/vault-recall/SKILL.md)** — loads the project's vault memory when you start.
+
+Set `VAULT_PROJECTS_ROOT` to your vault's `01_Projects` folder and drop the skill folder into your agent's skills directory. See [`skills/README.md`](skills/README.md) for per-agent install paths.
 
 ## 3. Archiving Old Sessions
 

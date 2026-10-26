@@ -6,8 +6,8 @@ Cursor relies on the `.cursorrules` file or project-specific instructions to gui
 
 1. Open your project in Cursor.
 2. Create or edit the `.cursorrules` file in the root of your project.
-3. Append the contents of `cursorrules-example` to your file.
-4. Modify the `<VAULT_PATH>` placeholder to point to your actual Obsidian vault project folder.
+3. Append the contents of `SKILL.md` from this folder to your file.
+4. Replace the `<VAULT_PROJECTS_ROOT>` placeholder with your actual Obsidian vault projects folder.
 
 ## Usage
 

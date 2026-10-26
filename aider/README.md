@@ -4,17 +4,17 @@ Aider works heavily in the terminal and often completes tasks by committing code
 
 ## Setup
 
-1. Copy the `architect-prompt.md` file into your project repository.
-2. Edit `architect-prompt.md` to point to your specific Obsidian vault path.
+1. Copy the `SKILL.md` file from this folder into your project repository.
+2. Replace the `<VAULT_PROJECTS_ROOT>` placeholder in `SKILL.md` with your Obsidian vault projects folder.
 
 ## Usage
 
 When you are done with a session in Aider, you can ask Aider to run the architect prompt:
 ```bash
-aider --message "Read architect-prompt.md and execute the Vault Sync procedure."
+aider --read SKILL.md --message "Execute the Vault Sync procedure."
 ```
 Or, from within the interactive Aider chat:
 ```
-/read architect-prompt.md
+/read SKILL.md
 Please execute the Vault Sync procedure.
 ```
