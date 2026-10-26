@@ -115,6 +115,16 @@ test("main - full execution", async () => {
   assert.ok(logContent.includes("Spawned vault sync for project"));
 });
 
+test("main - log dir does not exist yet", async () => {
+  const logDir = fs.mkdtempSync(path.join(os.tmpdir(), "vault-sync-logdir-"));
+  const logFile = path.join(logDir, "hooks", "vault-sync.log");
+  const transcriptPath = path.join(logDir, "transcript.jsonl");
+  fs.writeFileSync(transcriptPath, '{"type":"user","message":{"role":"user","content":"' + "A".repeat(200) + '"}}');
+
+  await main(JSON.stringify({ cwd: "/tmp/outside", transcript_path: transcriptPath }), "/tmp/vault", logFile, {});
+  assert.ok(fs.readFileSync(logFile, "utf8").includes("Spawned vault sync for project"));
+});
+
 test("main - trivial session", async () => {
   const logFile = path.join(os.tmpdir(), "test-main-log5.log");
   const tmpDir = os.tmpdir();
@@ -132,8 +142,8 @@ test("main - trivial session", async () => {
 
 test("main - fallback transcript path", async () => {
   const logFile = path.join(os.tmpdir(), "test-main-log6.log");
-  const cwd = path.join(os.tmpdir(), "my-test-project");
-  const encoded = cwd.replace(/[:\\/]/g, "-");
+  const cwd = path.join(os.tmpdir(), "my_test.project");
+  const encoded = cwd.replace(/[^a-zA-Z0-9]/g, "-");
   const projectDir = path.join(os.homedir(), ".claude", "projects", encoded);
   fs.mkdirSync(projectDir, { recursive: true });
   

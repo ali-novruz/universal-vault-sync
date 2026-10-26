@@ -32,6 +32,10 @@ Because Claude Code is a CLI tool, it has a built-in `SessionEnd` hook that fire
 }
 ```
 
+## Manual Sync (Skill)
+
+Prefer to sync on demand instead of on every exit? Copy `SKILL.md` to `~/.claude/skills/vault-sync/SKILL.md` and type `/vault-sync` (or ask Claude to "sync the vault") when you finish a task. For an agent-agnostic version plus the `vault-recall` companion, see [`../skills/`](../skills/).
+
 ## Archiving Old Sessions
 You can retroactively sync old Claude Code sessions into your vault:
 ```bash

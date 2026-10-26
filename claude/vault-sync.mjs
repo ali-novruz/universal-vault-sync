@@ -49,7 +49,7 @@ export async function main(inputStr, vaultRoot, logFile, processEnv) {
 
   let transcriptPath = payload.transcript_path;
   if (!transcriptPath || !fs.existsSync(transcriptPath)) {
-    const encoded = normCwd.replace(/[:\\/]/g, "-");
+    const encoded = normCwd.replace(/[^a-zA-Z0-9]/g, "-");
     const dir = path.join(os.homedir(), ".claude", "projects", encoded);
     if (!fs.existsSync(dir)) {
       log(`Skip: no transcript_path given and no projects dir at ${dir}`, logFile);
@@ -77,6 +77,9 @@ export async function main(inputStr, vaultRoot, logFile, processEnv) {
   fs.writeFileSync(tmpFile, condensed, "utf8");
 
   const vaultProjectDir = path.join(vaultRoot, projectName);
+  // The log dir (~/.claude/hooks) may not exist yet on a fresh install, and
+  // openSync below doesn't create it.
+  fs.mkdirSync(path.dirname(logFile), { recursive: true });
 
   const prompt = `A Claude Code session just ended. Your job is to archive it into the project note in an Obsidian-style vault.\n\n1. Read this file: ${tmpFile}\n2. Update the project note: ${path.join(vaultProjectDir, "README.md")}\n3. REQUIRED — do not skip: write a short (10-20 line), genuinely useful summary of this session to ${path.join(vaultProjectDir, "Chats")} named with today's date (YYYY-MM-DD.md, append -2, -3 if another session already exists for today).\n\n4. Only use the Read, Write, and Edit tools. Do not run any commands.\n\nDo not finish until BOTH file operations (step 2 and step 3) are done.`;
 

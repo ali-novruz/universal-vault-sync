@@ -13,7 +13,7 @@ test("standalone skills exist", () => {
 
 for (const skill of skills) {
   test(`${skill}/SKILL.md has valid frontmatter`, () => {
-    const text = fs.readFileSync(path.join(skillsDir, skill, "SKILL.md"), "utf8");
+    const text = fs.readFileSync(path.join(skillsDir, skill, "SKILL.md"), "utf8").replace(/\r\n/g, "\n");
     const match = text.match(/^---\n([\s\S]*?)\n---\n/);
     assert.ok(match, "should start with a YAML frontmatter block");
     const frontmatter = match[1];
