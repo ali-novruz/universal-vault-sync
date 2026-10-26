@@ -44,7 +44,7 @@ Just want the skills? The [`skills/`](skills/) folder has two self-contained, ag
 
 Set `VAULT_PROJECTS_ROOT` to your vault's `01_Projects` folder and drop the skill folder into your agent's skills directory. See [`skills/README.md`](skills/README.md) for per-agent install paths.
 
-You can also get them, plus the paid **Vault Memory Pro** add-ons (autosync, history import, ADRs, weekly digests), on [Agensi](https://agensi.io/creators/ali-novruz).
+You can also get them, plus the paid **Vault Memory Pro** add-ons (autosync, history import, ADRs, weekly digests), on [Agensi](https://agensi.io/creators/ali-novruz). All four add-ons are also available as one bundle.
 
 ## 3. Archiving Old Sessions
 

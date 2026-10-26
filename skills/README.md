@@ -27,6 +27,9 @@ whole history:
 | [Vault ADR](https://agensi.io/skills/vault-adr-architecture-decision-records-in-obsidian) | Records big technical decisions as numbered ADRs. |
 | [Vault Digest](https://agensi.io/skills/vault-digest-weekly-recap-of-your-ai-coding-work) | Writes a weekly recap of what shipped and what's still open. |
 
+Or get all four together in the **Vault Memory Pro** bundle: $14 instead of $18, on
+[my Agensi profile](https://agensi.io/creators/ali-novruz).
+
 ## Requirements
 
 - An Obsidian vault with a projects folder, e.g. the PARA layout from
