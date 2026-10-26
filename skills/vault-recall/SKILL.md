@@ -25,11 +25,16 @@ read-only: it never edits the vault.
 
 Use the first one that is set:
 
-1. Environment variable `VAULT_PROJECTS_ROOT`
-2. Environment variable `CLAUDE_VAULT_ROOT`
-3. A path the user already gave you in this conversation or in project rules
+1. The environment variable `VAULT_PROJECTS_ROOT`. Read it with
+   `printenv VAULT_PROJECTS_ROOT` (in PowerShell: `$env:VAULT_PROJECTS_ROOT`). Don't use
+   `echo $VAULT_PROJECTS_ROOT`: agents often block commands that expand variables.
+2. The environment variable `CLAUDE_VAULT_ROOT`, read the same way.
+3. A path the user already gave you in this conversation or in project rules.
 
-If none is available, ask the user once for the path (e.g. `~/Vault/01_Projects`).
+If none is set, ask the user once for the path (e.g. `~/Vault/01_Projects`).
+Never guess the path, and never fall back to another folder (such as the vault's top
+level or a directory you happen to have access to). If you can't ask, stop and say the
+vault path is missing.
 
 ## 2. Identify the project
 
