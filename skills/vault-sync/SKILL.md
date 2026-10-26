@@ -8,7 +8,7 @@ description: >-
   session", "save this to Obsidian", "/vault-sync", or when finishing a task.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   author: Ali Novruz
   homepage: https://universal-vault-sync.vercel.app
   repository: https://github.com/ali-novruz/universal-vault-sync
