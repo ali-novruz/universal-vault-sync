@@ -11,6 +11,22 @@ clone the rest of this repo.
 
 Use them together: `vault-recall` when you start, `vault-sync` when you finish.
 
+Both are also on [Agensi](https://agensi.io/creators/ali-novruz):
+[Vault Sync](https://agensi.io/skills/vault-sync-shared-memory-for-ai-coding-agents) ·
+[Vault Recall](https://agensi.io/skills/vault-recall-load-project-memory-into-any-agent)
+
+### Vault Memory Pro
+
+Paid add-ons on Agensi, for when you want the memory to fill itself and cover your
+whole history:
+
+| Skill | What it does |
+|---|---|
+| [Vault Autosync](https://agensi.io/skills/vault-autosync-auto-save-claude-code-sessions) | Saves every Claude Code session to the vault automatically when it ends. |
+| [Vault Import](https://agensi.io/skills/vault-import-backfill-your-old-ai-coding-sessions) | Backfills the vault from your old Claude Code and Antigravity sessions. |
+| [Vault ADR](https://agensi.io/skills/vault-adr-architecture-decision-records-in-obsidian) | Records big technical decisions as numbered ADRs. |
+| [Vault Digest](https://agensi.io/skills/vault-digest-weekly-recap-of-your-ai-coding-work) | Writes a weekly recap of what shipped and what's still open. |
+
 ## Requirements
 
 - An Obsidian vault with a projects folder, e.g. the PARA layout from
