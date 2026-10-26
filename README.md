@@ -44,6 +44,8 @@ Just want the skills? The [`skills/`](skills/) folder has two self-contained, ag
 
 Set `VAULT_PROJECTS_ROOT` to your vault's `01_Projects` folder and drop the skill folder into your agent's skills directory. See [`skills/README.md`](skills/README.md) for per-agent install paths.
 
+You can also get them, plus the paid **Vault Memory Pro** add-ons (autosync, history import, ADRs, weekly digests), on [Agensi](https://agensi.io/creators/ali-novruz).
+
 ## 3. Archiving Old Sessions
 
 If you have old chat histories that you want to convert into Obsidian notes, we provide "condense" scripts for CLI and IDE tools that output raw `.jsonl` logs.
